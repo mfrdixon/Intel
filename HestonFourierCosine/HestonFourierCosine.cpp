@@ -40,30 +40,6 @@ inline std::complex<double> HestonCF(
         double rho
         ) 
 {
-
-    std::complex<double> j1(0, 1);
-    double a                    = lmbda *meanV;
-    double b                    = lmbda;
-    double sigma2               = sigma*sigma;
-    std::complex<double> d      = sqrt(pow(j1*rho*sigma*u-b,2)+(u*u+j1*u)*sigma2);		
-    std::complex<double> g      = (b-j1*rho*sigma*u - d)/(b-j1*rho*sigma*u+d);
-    std::complex<double> ret    = exp(j1*u*r*T);
-    ret                         *= exp((a/sigma2)*((b - rho*j1*sigma*u - d)*T - 2.0*log((1.0-g*exp(-d*T))/(1.0-g))));
-    return ret*exp((v0/sigma2)*(b - rho*j1*sigma*u - d)*(1.0-exp(-d*T))/(1.0-g*exp(-d*T)));
-}
-
-
-inline std::complex<double> Test(
-        double u,
-        double T,
-        double r,
-        double sigma,
-        double lmbda,
-        double meanV,
-        double v0,
-        double rho
-        ) 
-{
     std::complex<double> j1(0, 1);
     double a                    = lmbda *meanV;
     double b                    = lmbda;
@@ -133,7 +109,7 @@ inline double HestonCOS(
     for (int k=0; k < N; k++)
     {     
       U = 2.0/(b-a)*(xi(k,a,b,0,b) - psi(k,a,b,0,b));             
-      std::complex<double> HCF = Test(k*pi/(b-a),T,r,sigma,lmbda,meanV,v0,rho);
+      std::complex<double> HCF = HestonCF(k*pi/(b-a),T,r,sigma,lmbda,meanV,v0,rho);
       ret += unit*HCF*exp(j1*double(k)*pi*(x-a)/(b-a))*U;
       unit = 1.0;
     }
