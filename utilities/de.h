@@ -2,8 +2,8 @@
 * Definition of macros and structure
 * for population member
 * 
-* Author: Matthew Dixon and Xin Zhang
-* Date: Nov.30 2016
+* Author: Rainer Storn 
+* Date: 
 */
 
 
