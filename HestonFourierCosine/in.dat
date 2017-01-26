@@ -1,0 +1,23 @@
+2
+1
+5
+100
+0.3
+1.0
+1234
+1
+
+
+choice of method i_strategy
+maximum number of iterations i_genmax
+output refresh cycle i_refresh
+number of parameters gi_D
+number of parents i_NP
+weighting factor f_weight
+crossover constant f_cross
+random seed i_seed
+selection flag i_bs_flag
+float fa_minbound[gi_D];
+float fa_maxbound[gi_D];
+
+
