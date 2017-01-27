@@ -36,7 +36,7 @@ int main()
 		 
 		 tcos += t2-t1;
 		 
-		 std::cout<<"DEoptim Time = "<<tcos<<" sec"<<std::endl;
+		 fprintf(Fp_out, "DEoptim Time = %12.10f sec\n",tcos); 
 		 
 		 fprintf(Fp_out, "RMSE = %12.10f\n", best.fa_cost[0]);
 		 fprintf(Fp_out,"\n******** best vector ********\n");
@@ -69,7 +69,7 @@ int main()
 		 double t4 = dtime(); 
 
 		 tcos +=  t4-t3;
-		 std::cout<<"Nlopt Time = "<<t4-t3<<" sec"<<std::endl;
+		 fprintf(Fp_out, "nlopt Time = %12.10f sec\n",t4-t3);
 		 
 		 fprintf(Fp_out, "NLOPT RMSE = %f\n", minf);
 		 fprintf(Fp_out,"\n******** best vector ********\n");
@@ -79,9 +79,10 @@ int main()
 			 fprintf(Fp_out,"best_vector[%d]=%12.10f\n", i, x[i]);
 		 }
 		 
-		 std::cout<<"Total Time = "<<tcos<<" sec"<<std::endl;
+		 //std::cout<<"Total Time = "<<tcos<<" sec"<<std::endl;
+                 std::cout<<tcos<<std::endl;
+                 final(Fp_out);
 		 free();
-		 
 		 fclose(Fp_in);
 		 fclose(Fp_out);
 	}

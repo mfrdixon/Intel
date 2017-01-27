@@ -203,13 +203,15 @@ int taking_input()
 		W[idx++] = it->getWeight()/w;
 	return 1;
 }
+void final(FILE* Fp_out)
+{
+        fprintf(Fp_out,"Total Number of calls In Error Function=%d\n",counter);
+        fprintf(Fp_out,"Time Per Error Function Call=%12.10f sec\n",totaltime/counter);
+        fprintf(Fp_out,"Total Time Elapsed In Error Function=%12.10f sec\n",totaltime);
+}
 
 void free()
 {
-	std::cout<<"Total Number of calls In Error Function= "<<counter<<std::endl;
-	std::cout<<"Time Per Error Function Call= "<<totaltime/counter<<" sec"<<std::endl;
-	std::cout<<"Total Time Elapsed In Error Function = "<<totaltime<<" sec"<<std::endl;	
-
     	delete [] K;
     	delete [] T;
     	delete [] W;
@@ -221,7 +223,7 @@ void free()
 
 double c_main(unsigned n, const double *p0 ,double *grad, void *data )
 {
-    	std::cout.precision(16);
+    	std::cout.precision(8);
     	bool bIncorporateNLConstraint = true;
     	int nInt = 256;
     	double rmse;
