@@ -1,0 +1,21 @@
+2
+10
+5
+100
+0.3
+1.0
+1234
+1
+
+
+choice of strategy gi_strategy
+maximum number of generations i_genmax
+number of parameters gi_D
+population size gi_NP
+weighting factor f_weight
+crossover constant f_cross
+random seed i_seed
+selection flag i_bs_flag
+float fa_minbound[gi_D];
+float fa_maxbound[gi_D];
+

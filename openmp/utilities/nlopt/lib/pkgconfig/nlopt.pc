@@ -1,0 +1,10 @@
+prefix=/home/skhan/R/C+DE/installed_nlopt
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: NLopt
+Description: nonlinear optimization libary
+Version: 2.3
+Libs: -L${libdir} -lnlopt -lm
+Cflags: -I${includedir}
