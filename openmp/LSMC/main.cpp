@@ -1,4 +1,5 @@
 #include "svd.h"
+// The following code generates the paths of a single risk factor. It then assumes that there are P early exercisable instruments in the portfolio and performs the backward induction for each instrument in parallel.
 
 double call_price(const double& S, const double& K, const double& r, const double& v, const double& T);
 
@@ -13,6 +14,7 @@ int main()
     double const T = 1.0;    // time-to-maturity
     double const r = 0.06;   // short rate
     double const sigma = 0.2;// volatility
+    int const P = 100;       // Number of options in portfolio
 
     // Simulation Parameters
     int const num_steps = 2;  // number of time steps
@@ -48,12 +50,14 @@ int main()
       s[i][1] = s0;
       for (int j=2; j<=(num_steps+1);j++){
          s[i][j] = s[i][j-1]*(1.0+r*dt + sqrt(dt)*sigma*distribution(generator));
+     // NOTE: need an extra for loop over all P options
          h[i][j] = DMAX(s[i][j]-K,0.0);
       }
       y[i] = h[i][num_steps+1]; // payoff function
       //std::cout<<y[i]<<std::endl;
       sig[i]= y[i]*noise;
     }
+    // NOTE: need an extra for loop over all options
     // American Option Valuation by Backwards Induction
     for (int t=num_steps; t>1;t--) {
        for (int i=1; i<= num_points;i++){
@@ -89,6 +93,7 @@ int main()
             y[i] = h[i][t];
        }
     }
+    //NOTE: need to an extra sum over all instruments
     double V0=0.0; 
     for (i=1;i<=num_points;i++)
       V0 += y[i]; 
