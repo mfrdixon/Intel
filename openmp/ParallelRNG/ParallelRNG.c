@@ -4,7 +4,7 @@
  * random number generation and compiler vectorization, 
  * plus OpenMP parallelization
  *
- * author: Matthew Dixon and Xin Zhang
+ * author: Matthew Dixon and Xin Zhang, adapted from a code written by Mike Giles
  *
  * Date: Nov 30 2016
  */
