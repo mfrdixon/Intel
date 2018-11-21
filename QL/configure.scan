@@ -1,0 +1,191 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.69])
+AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+AC_CONFIG_SRCDIR([Docs/Examples/history_iterators.cpp])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
+AC_PROG_CXX
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+
+# Checks for libraries.
+
+# Checks for header files.
+AC_CHECK_HEADERS([float.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
+AC_C_INLINE
+AC_TYPE_PID_T
+AC_C_RESTRICT
+AC_TYPE_SIZE_T
+AC_TYPE_UINT16_T
+AC_TYPE_UINT32_T
+AC_TYPE_UINT64_T
+AC_TYPE_UINT8_T
+
+# Checks for library functions.
+AC_FUNC_ERROR_AT_LINE
+AC_FUNC_FORK
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([floor modf pow sqrt])
+
+AC_CONFIG_FILES([Docs/Makefile
+                 Examples/AswZSpreads/Makefile
+                 Examples/BasketLosses/Makefile
+                 Examples/BermudanSwaption/Makefile
+                 Examples/BermudanSwaption2/Makefile
+                 Examples/Bonds/Makefile
+                 Examples/CDS/Makefile
+                 Examples/CVAIRS/Makefile
+                 Examples/CallableBonds/Makefile
+                 Examples/CallableBonds2/Makefile
+                 Examples/CmsMarket/Makefile
+                 Examples/CmsSwaption/Makefile
+                 Examples/ConvertibleBonds/Makefile
+                 Examples/CreditRiskPlus/Makefile
+                 Examples/DiscreteHedging/Makefile
+                 Examples/EquityOption/Makefile
+                 Examples/FRA/Makefile
+                 Examples/FittedBondCurve/Makefile
+                 Examples/Gaussian1dModels/Makefile
+                 Examples/InterestRateSmiles/Makefile
+                 Examples/KahaleSmileSection/Makefile
+                 Examples/LatentModel/Makefile
+                 Examples/Lmm/Makefile
+                 Examples/Makefile
+                 Examples/MarketModels/Makefile
+                 Examples/MultidimIntegral/Makefile
+                 Examples/MultitenorVols/Makefile
+                 Examples/NonstandardSwaption/Makefile
+                 Examples/ProxyPricing/Makefile
+                 Examples/Replication/Makefile
+                 Examples/Repo/Makefile
+                 Examples/SimulatedAnnealing/Makefile
+                 Examples/SviSmileSection/Makefile
+                 Examples/Swap/Makefile
+                 Examples/Volaswap/Makefile
+                 Makefile
+                 m4/Makefile
+                 man/Makefile
+                 ql/Makefile
+                 ql/cashflows/Makefile
+                 ql/currencies/Makefile
+                 ql/experimental/Makefile
+                 ql/experimental/amortizingbonds/Makefile
+                 ql/experimental/barrieroption/Makefile
+                 ql/experimental/callablebonds/Makefile
+                 ql/experimental/catbonds/Makefile
+                 ql/experimental/commodities/Makefile
+                 ql/experimental/convertiblebonds/Makefile
+                 ql/experimental/coupons/Makefile
+                 ql/experimental/credit/Makefile
+                 ql/experimental/exoticoptions/Makefile
+                 ql/experimental/finitedifferences/Makefile
+                 ql/experimental/fx/Makefile
+                 ql/experimental/inflation/Makefile
+                 ql/experimental/lattices/Makefile
+                 ql/experimental/math/Makefile
+                 ql/experimental/mcbasket/Makefile
+                 ql/experimental/models/Makefile
+                 ql/experimental/processes/Makefile
+                 ql/experimental/risk/Makefile
+                 ql/experimental/shortrate/Makefile
+                 ql/experimental/swaptions/Makefile
+                 ql/experimental/variancegamma/Makefile
+                 ql/experimental/varianceoption/Makefile
+                 ql/experimental/volatility/Makefile
+                 ql/experimental/xva/Makefile
+                 ql/experimental/yield/Makefile
+                 ql/indexes/Makefile
+                 ql/indexes/ibor/Makefile
+                 ql/indexes/inflation/Makefile
+                 ql/indexes/swap/Makefile
+                 ql/instruments/Makefile
+                 ql/instruments/bonds/Makefile
+                 ql/legacy/Makefile
+                 ql/legacy/libormarketmodels/Makefile
+                 ql/math/Makefile
+                 ql/math/copulas/Makefile
+                 ql/math/distributions/Makefile
+                 ql/math/integrals/Makefile
+                 ql/math/interpolations/Makefile
+                 ql/math/matrixutilities/Makefile
+                 ql/math/ode/Makefile
+                 ql/math/optimization/Makefile
+                 ql/math/randomnumbers/Makefile
+                 ql/math/solvers1d/Makefile
+                 ql/math/statistics/Makefile
+                 ql/methods/Makefile
+                 ql/methods/finitedifferences/Makefile
+                 ql/methods/finitedifferences/meshers/Makefile
+                 ql/methods/finitedifferences/operators/Makefile
+                 ql/methods/finitedifferences/schemes/Makefile
+                 ql/methods/finitedifferences/solvers/Makefile
+                 ql/methods/finitedifferences/stepconditions/Makefile
+                 ql/methods/finitedifferences/utilities/Makefile
+                 ql/methods/lattices/Makefile
+                 ql/methods/montecarlo/Makefile
+                 ql/models/Makefile
+                 ql/models/equity/Makefile
+                 ql/models/marketmodels/Makefile
+                 ql/models/marketmodels/browniangenerators/Makefile
+                 ql/models/marketmodels/callability/Makefile
+                 ql/models/marketmodels/correlations/Makefile
+                 ql/models/marketmodels/curvestates/Makefile
+                 ql/models/marketmodels/driftcomputation/Makefile
+                 ql/models/marketmodels/evolvers/Makefile
+                 ql/models/marketmodels/evolvers/volprocesses/Makefile
+                 ql/models/marketmodels/models/Makefile
+                 ql/models/marketmodels/pathwisegreeks/Makefile
+                 ql/models/marketmodels/products/Makefile
+                 ql/models/marketmodels/products/multistep/Makefile
+                 ql/models/marketmodels/products/onestep/Makefile
+                 ql/models/marketmodels/products/pathwise/Makefile
+                 ql/models/shortrate/Makefile
+                 ql/models/shortrate/calibrationhelpers/Makefile
+                 ql/models/shortrate/onefactormodels/Makefile
+                 ql/models/shortrate/twofactormodels/Makefile
+                 ql/models/volatility/Makefile
+                 ql/patterns/Makefile
+                 ql/pricingengines/Makefile
+                 ql/pricingengines/asian/Makefile
+                 ql/pricingengines/barrier/Makefile
+                 ql/pricingengines/basket/Makefile
+                 ql/pricingengines/bond/Makefile
+                 ql/pricingengines/capfloor/Makefile
+                 ql/pricingengines/cliquet/Makefile
+                 ql/pricingengines/credit/Makefile
+                 ql/pricingengines/forward/Makefile
+                 ql/pricingengines/inflation/Makefile
+                 ql/pricingengines/lookback/Makefile
+                 ql/pricingengines/quanto/Makefile
+                 ql/pricingengines/swap/Makefile
+                 ql/pricingengines/swaption/Makefile
+                 ql/pricingengines/vanilla/Makefile
+                 ql/processes/Makefile
+                 ql/quotes/Makefile
+                 ql/termstructures/Makefile
+                 ql/termstructures/credit/Makefile
+                 ql/termstructures/inflation/Makefile
+                 ql/termstructures/volatility/Makefile
+                 ql/termstructures/volatility/capfloor/Makefile
+                 ql/termstructures/volatility/equityfx/Makefile
+                 ql/termstructures/volatility/inflation/Makefile
+                 ql/termstructures/volatility/optionlet/Makefile
+                 ql/termstructures/volatility/swaption/Makefile
+                 ql/termstructures/yield/Makefile
+                 ql/time/Makefile
+                 ql/time/calendars/Makefile
+                 ql/time/daycounters/Makefile
+                 ql/utilities/Makefile
+                 test-suite/Makefile])
+AC_OUTPUT
