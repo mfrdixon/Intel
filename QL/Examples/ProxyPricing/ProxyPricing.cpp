@@ -17,6 +17,19 @@
  FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
+// Notes: This file has been adapted from an implementation by Peter Caspers. That implementation is for LSMC proxy pricing for a Bermudan swaption. This file implements CVA estimation of a portfolio of Bermudan swaptions using LSMC proxy pricing for each instrument. 
+
+// The model assumes the following:
+// (i) rates are modeled with a one factor short rate model
+// (ii) each rate corresponding to each xIBOR curve are uncorrelated. 
+// (iii) the default model is Poisson with a fixed hazard rate 
+//
+// Output: the code compares the CVA accuracy with LSMC and under a closed form solution. The timings of the LSMC are also given. 
+// Further details of the model are given in docs/CVA_technical_note.pdf
+//
+// Author: Matthew Dixon
+// Date:   December the 2nd, 2018
+
 #include <ql/quantlib.hpp>
 #include <boost/timer.hpp>
 #include <ql/termstructures/credit/piecewisedefaultcurve.hpp>
@@ -150,6 +163,7 @@ int main(int argc, char *argv[]) {
         Handle<Quote> rateLevelRef(rateLevelRefQuote);
         Handle<YieldTermStructure> ytsRef(boost::make_shared<FlatForward>(
             0, TARGET(), rateLevelRef, Actual365Fixed()));
+        // Construct the target xIBOR portfolio. To do: This should be placed in a for loop 
 
         indices.push_back(boost::make_shared<USDLibor>(6 * Months, ytsOrig));
         indicesRef.push_back(boost::make_shared<USDLibor>(6 * Months, ytsOrig));
@@ -169,7 +183,6 @@ int main(int argc, char *argv[]) {
         indices.push_back(boost::make_shared<DKKLibor>(6 * Months, ytsOrig));
         indicesRef.push_back(boost::make_shared<DKKLibor>(6 * Months, ytsOrig));
         
-
         indices.push_back(boost::make_shared<EURLibor>(6 * Months, ytsOrig));
         indicesRef.push_back(boost::make_shared<EURLibor>(6 * Months, ytsOrig));
 
@@ -200,7 +213,7 @@ int main(int argc, char *argv[]) {
         indices.push_back(boost::make_shared<Tibor>(6 * Months, ytsOrig));
         indicesRef.push_back(boost::make_shared<Tibor>(6 * Months, ytsOrig));
 
-
+        // Configure the Bermudan swaptions for the reference XIBOR curves
         // the maturity of the bermudan swaption in years    
         Size length = 10;
                 // instrument setup
@@ -312,7 +325,7 @@ int main(int argc, char *argv[]) {
                 rateLevelRefQuote->setValue(0.02); // no change
                 maturityRefQuote->setValue(10.5-float(i)/360.0);  // maturity of the underlying
                 npvOrigIntegral = (*it_)->NPV();
-                cvaOrig += (1.0-exp(-0.01*i)) *(1-recovery_rate)*npvOrigIntegral;
+                cvaOrig += (1.0-exp(-0.01*i)) *(1-recovery_rate)*npvOrigIntegral;//Analytic CVA estimation as in Eq 1.12 in the technical note
                 //cvaOrig += hazardRateStructure->defaultProbability(currentDate)*(1-recovery_rate)*npvOrigIntegral;
                 std::clog << "Integral engine npv = " << npvOrigIntegral << "\n"; \
             }
@@ -359,7 +372,7 @@ int main(int argc, char *argv[]) {
                 rateLevelRefQuote->setValue(0.02); // no change
                 maturityRefQuote->setValue(10.5-float(i)/360.0);  // maturity of the underlying
                 npvProxy = (*it_)->NPV();
-                cvaProxy += (1.0-exp(-0.01*i))*(1-recovery_rate)*npvProxy;
+                cvaProxy += (1.0-exp(-0.01*i))*(1-recovery_rate)*npvProxy; // CVA proxy estimation as in Eq 1.12 in the technical note
                 //cvaProxy += hazardRateStructure->defaultProbability(currentDate)*(1-recovery_rate)*npvProxy;
                 //errorProxyMc = (*it)->errorEstimate();
                 std::clog << "Proxy engine npv = " << npvProxy << "\n"; \
